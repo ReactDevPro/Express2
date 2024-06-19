@@ -1,0 +1,129 @@
+/************Liste des fournisseurs***********/
+
+.btn{
+    text-align: center;
+}
+.btn .btn1 {
+           cursor: pointer;
+           background-color: rgb(20, 20, 255);
+           transition: 0.3s;
+           width: 32px;
+           height: 32px;
+           border: none;
+           border-radius: 3px;
+           transform: translateX(-5px);
+}
+.btn .btn2 {
+           cursor: pointer;
+           background-color: rgb(255, 30, 30);
+           transition: 0.3s;
+           width: 32px;
+           height: 32px;
+           border: none;
+           border-radius: 3px;
+           transform: translateX(5px);
+}
+.btn .btn1:hover{
+                 background-color: rgb(10, 10, 151);
+}
+.btn .btn2:hover{
+                background-color: rgb(155, 16, 16);                                                                                                                                                                                                
+}
+.mont{
+    display: flex;
+    padding: 10px;
+    background-color: #fff;
+    border: solid rgb(236, 236, 0);
+}
+.mont .titre{
+      font-size: 20px;
+      color: rgb(90, 90, 90);
+      font-weight: bold;
+      margin-right: 700px;
+}
+.cicle-text{
+    font-size: 10px;
+    color: rgb(53, 52, 52);
+    margin-top: 12px;
+}
+.cicle .btn3{
+     background-color: rgb(1, 173, 1);
+     color: #fff;
+     border: none;
+     border-radius: 20px;
+     cursor: pointer;
+     transition: 0.3s;
+     height: 25px;
+     width: 25px;
+     font-weight: bold;
+     font-size: 15px;
+     transform: translateX(17px);
+}
+.cicle .btn3:hover{
+            background-color: rgb(18, 75, 18);
+}
+.cicle .text{
+           transform: translate(600px,13px);
+           height: 40px; 
+           border-color: rgb(227, 228, 230);
+}
+.cicle{
+     background-color: #fff;
+     height: 70px;
+     border: solid rgb(236, 236, 0);
+     background-color: rgb(124, 124, 21);
+}
+
+/* Ajout fournisseurs*/
+.symbole{
+    font-weight: bold;
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.escence{
+    background-color: orange;
+    padding: 1px;
+    border-left: solid 5px rgb(167, 111, 7) ;
+    border-right: 2px;
+    color: #fff; 
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.forma{
+     background-color: #fff;
+     transform: translateY(-6px);
+     border-top: solid orange 4px;
+     padding: 10px;
+} 
+.btn4{
+    background-color: rgb(1, 173, 1);
+    border: none;
+    padding: 7px;
+    border-radius: 5px;
+    color: #fff;
+    transition: 0.3s
+}
+.btn4:hover{
+     background-color: green;
+}
+label{
+     font-weight: bold;
+}
+.logo{
+    display: flex;
+    transform: translateY(12px);
+}
+div .log1{
+          font-weight: bold;
+          font-size: 20px;
+          color: rgb(90, 90, 90);
+}
+div .log3{
+          transform: translateX(750px);
+          font-size: 10px;
+}
+.encercle{
+    display: flex;
+}
+.minicercle{
+    transform: translateX(260px);
+}

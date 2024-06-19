@@ -1,0 +1,49 @@
+.cloud{
+    background-color: orange;
+    padding: 1px;
+    border-left: solid 5px rgb(167, 111, 7) ;
+    border-right: 2px;
+    color: #fff; 
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.mot{
+    font-weight: bold;
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.groupe{
+    background-color: rgb(14, 14, 63);
+    height: 400px;
+    display: flex;
+    
+}
+.groupe .premier{
+    position: absolute;
+    color: rgb(78, 155, 255);
+    font-weight: bold;
+}
+.groupe .contient{
+    width: 220px;
+    height: 258px;
+    background-color: #fff;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 20px;
+    z-index: 1;
+    cursor: pointer;
+}
+.groupe .contient:hover{
+    box-shadow: 10px 10px 10px rgb(0,0, 0, 0.5);
+}
+.groupe .zone{
+    width: 250px;
+    height: 370px;
+    background-color: #fff;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+.groupe .zone:hover{
+    box-shadow: 10px 10px 10px rgb(0,0, 0, 0.5);
+}
