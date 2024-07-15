@@ -4,6 +4,7 @@ import Home from '../../Pages/Home/Home';
 import User from '../../Pages/User/User';
 import Stocks from '../../Pages/Stocks/Stocks';
 import Rapports from '../../Pages/Rapports/Rapports';
+import Produit from '../../Pages/Categories/Produit';
 import Categories from '../../Pages/Categories/Categories';
 import Commandes from '../../Pages/Commandes/Commandes';
 import Fournisseurs from '../../Pages/Fournisseurs/Fournisseurs';
@@ -26,6 +27,7 @@ function AppRouter(){
                 <Route path='/User' element={<User/>} />
                 <Route path='/Stocks' element = {<Stocks/>}/>
                 <Route path='/Rapports' element = {<Rapports/>}/>
+                <Route path='/Produit' element = {<Produit/>}/>
                 <Route path='/Categories' element = {<Categories/>}/>
                 <Route path='/Commandes' element={<Commandes/>}/>
                 <Route path='/Fournisseurs' element = {<Fournisseurs/>}/>

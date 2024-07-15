@@ -40,6 +40,9 @@ import {Menu, Layout} from 'antd';
                 <Menu.Item  Key='Rapports' icon={<FileTextOutlined/>} onClick={()=>{navigate('/Rapports')}}>
                     Rapports
                 </Menu.Item>
+                <Menu.Item  Key='Categories' icon={<ShoppingOutlined/>} onClick={()=>{navigate('/Produit')}}>
+                    Produits
+                </Menu.Item>
                 <Menu.Item  Key='Categories' icon={<ShoppingOutlined/>} onClick={()=>{navigate('/Categories')}}>
                     Categories
                 </Menu.Item>

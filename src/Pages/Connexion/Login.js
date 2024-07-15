@@ -6,7 +6,7 @@ const Login = ({ onLogin, onSwitchToSignUp, onSwitchToResetPassword, users }) =>
 
   const handleLogin = (values) => {
     setLoading(true);
-    const { username, password } = values;
+    const { username, password} = values;
 
     // Vérifier les informations d'identification par rapport aux utilisateurs inscrits
     const user = users.find(user => user.username === username && user.password === password);

@@ -12,14 +12,17 @@ import ResetPassword from './Pages/Reinitialiser/ResetPassword';
 
 
 
+
 const {Header, Footer, Content} = Layout;
 
 function App(){
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  const [view, setView] = useState('login'); // 'login', 'signup', 'resetPassword'
+  const [view, setView] = useState('login'); // 'login', 'signup', 'resetPassword', 'dashboard',
   const [users, setUsers] = useState([{ username: 'admin', password: 'password' }]);
+
+
 
   const handleLogin = ({ username }) => {
     setUser({ username });
@@ -63,6 +66,8 @@ function App(){
 
           <Layout className='site-layout'>
               <Header className='site-layout-background' style={{padding: 0, backgroundColor: 'rgb(0, 44, 95)'}}>
+              
+
                 <div style={{display: "flex"}}>
                    <div style={{marginLeft: "20px"}}><span style={{color : 'white'}}><UserOutlined type='primary'/></span><span style={{color:'orange', fontWeight:'bold', fontSize: '12px'}}> {user.username}</span></div>
                    <div style={{textAlign: 'right', marginLeft: '750px'}}> 
@@ -76,7 +81,8 @@ function App(){
               <Content style= {{margin : '0 16px'}}>
                   <div className='site-layout-background' style={{padding: 24, minHeight: 360}}>
                       <AppRouter/>
-
+                      
+                     
                     
                   </div>
               </Content>
