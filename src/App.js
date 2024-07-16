@@ -61,10 +61,10 @@ function App(){
   }
 
   return(
-      <Layout style={{minHeight: '100vh'}}>
+      <Layout style={{minHeight: '100vh', zIndex: '1'}}>
           <AppSider/>
 
-          <Layout className='site-layout'>
+          <Layout className='site-layout' style={{minHeight: '100vh', zIndex: '1'}}>
               <Header className='site-layout-background' style={{padding: 0, backgroundColor: 'rgb(0, 44, 95)'}}>
               
 
@@ -86,7 +86,7 @@ function App(){
                     
                   </div>
               </Content>
-              <Footer style={{textAlign : 'left', backgroundColor: "rgb(0, 44, 95)", fontWeight: 'bold',fontSize: "20px"}}>
+              <Footer style={{textAlign : 'left',  zIndex: '1', backgroundColor: "rgb(0, 44, 95)", fontWeight: 'bold',fontSize: "20px"}}>
                   <span style={{color : "#fff"}}>Express management</span>  <span style={{color : "orange"}}>activity</span> 
               </Footer>
 

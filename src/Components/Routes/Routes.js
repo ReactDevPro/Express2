@@ -4,7 +4,6 @@ import Home from '../../Pages/Home/Home';
 import User from '../../Pages/User/User';
 import Stocks from '../../Pages/Stocks/Stocks';
 import Rapports from '../../Pages/Rapports/Rapports';
-import Produit from '../../Pages/Categories/Produit';
 import Categories from '../../Pages/Categories/Categories';
 import Commandes from '../../Pages/Commandes/Commandes';
 import Fournisseurs from '../../Pages/Fournisseurs/Fournisseurs';
@@ -19,6 +18,7 @@ import Login from '../../Pages/Connexion/Login';
 import SignUp from '../../Pages/inscription/SignUp';
 import ResetPassword from '../../Pages/Reinitialiser/ResetPassword';
 import Dashboard from '../../Pages/Dashboard/Dashboard';
+import Produits from '../../Pages/Categories/Produits';
 
 function AppRouter(){
     return(
@@ -27,7 +27,6 @@ function AppRouter(){
                 <Route path='/User' element={<User/>} />
                 <Route path='/Stocks' element = {<Stocks/>}/>
                 <Route path='/Rapports' element = {<Rapports/>}/>
-                <Route path='/Produit' element = {<Produit/>}/>
                 <Route path='/Categories' element = {<Categories/>}/>
                 <Route path='/Commandes' element={<Commandes/>}/>
                 <Route path='/Fournisseurs' element = {<Fournisseurs/>}/>
@@ -42,7 +41,7 @@ function AppRouter(){
                 <Route path='/SignUp' element = {<SignUp/>}/>
                 <Route path='/ResetPassword' element = {<ResetPassword/>}/>
                 <Route path='/Dashboard' element = {<Dashboard/>}/>
-                
+                <Route path='/Produits/:category' element = {<Produits/>}/>
             </Routes>
     )
 }

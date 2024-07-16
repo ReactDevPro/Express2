@@ -1,0 +1,13 @@
+.category-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+.category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(83, 8, 80, 0.884);
+  }
+  
+
+.zone{
+  background-color: rgb(252, 185, 61);
+}
+
