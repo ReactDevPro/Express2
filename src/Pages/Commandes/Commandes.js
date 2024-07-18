@@ -39,14 +39,14 @@ function Commandes() {
           </div>
           <div className='contient'>
              <p><img src= {Client} alt="Commandes clients" width="220px" height="120px"/></p>
-             <p>Commande Client</p>
-             <p style={{color:'#E6E6FA'}}>Gerer les commandes clients ici</p>
+             <p style={{fontWeight: 'bold'}}>VENTES</p>
+             <p style={{color:'#E6E6FA'}}>Gerer les ventes ici</p>
              <p><Button onClick={()=>{navigate('/ComdClient')}}>Enter</Button></p>
           </div>
           <div className='zone'>
           <p><img src= {Four} alt="Reception" width="225px" height="210px"/></p>
-             <p>Reception</p>
-             <p style={{color:'#E6E6FA'}}>Gerer les receptions des commandes fournisseurs</p>
+             <p style={{fontWeight: 'bold'}}>ACHATS</p>
+             <p style={{color:'#E6E6FA'}}>Gerer les achats ici</p>
              <p><Button onClick={()=>{navigate('/Reception')}}>Enter</Button></p>
           </div> 
         </div>)}

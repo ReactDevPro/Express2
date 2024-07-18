@@ -118,7 +118,7 @@ const Produits = () => {
       title: 'Prix',
       dataIndex: 'price',
       key: 'price',
-      render: (text) => `${text} €`,
+      render: (text) => `${text} FCFA`,
     },
     {
       title: 'Quantité Initiale',

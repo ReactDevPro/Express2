@@ -1,190 +1,146 @@
 import React, { useState } from 'react';
-import { Table, Button, Modal, Form, Input, InputNumber, Select, DatePicker, message } from 'antd';
-import moment from 'moment';
+import { Table, Button, Modal, Form, InputNumber, Select, DatePicker, Space, message,Input } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import ClientsModal from './ClientsModal';
+import ProduitsModal from './ProduitsModal';
 
-const { Option } = Select;
-
-const initialOrders = [
-  { 
-    id: 1, 
-    customerName: 'Jean Dupont', 
-    productName: 'Produit A', 
-    quantity: 2, 
-    price: 150, 
-    status: 'en cours', 
-    orderDateTime: moment(), 
-    deliveryDateTime: moment().add(2, 'days'),
-    totalPrice: 300 
-  },
-  { 
-    id: 2, 
-    customerName: 'Marie Curie', 
-    productName: 'Produit B', 
-    quantity: 1, 
-    price: 200, 
-    status: 'livré', 
-    orderDateTime: moment(), 
-    deliveryDateTime: moment().add(1, 'days'),
-    totalPrice: 200 
+const initialCommandesClients = [
+  {
+    id: 1,
+    client: { id: 1, nom: 'Client A' },
+    produit: { id: 1, nom: 'Produit A' },
+    quantite: 10,
+    dateLivraison: '2023-07-20',
+    statut: 'En cours',
   },
 ];
 
-const ComdClient = ({ sendReportData }) => {
-  const [orders, setOrders] = useState(initialOrders);
+const ComdClient = () => {
+  const [commandesClients, setCommandesClients] = useState(initialCommandesClients);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [editingOrder, setEditingOrder] = useState(null);
+  const [isClientsModalVisible, setIsClientsModalVisible] = useState(false);
+  const [isProduitsModalVisible, setIsProduitsModalVisible] = useState(false);
+  const [editingCommandeClient, setEditingCommandeClient] = useState(null);
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [selectedProduit, setSelectedProduit] = useState(null);
   const [form] = Form.useForm();
 
-  const handleAddOrder = () => {
-    setEditingOrder(null);
+  const handleAddCommandeClient = () => {
+    setEditingCommandeClient(null);
+    setSelectedClient(null);
+    setSelectedProduit(null);
     form.resetFields();
     setIsModalVisible(true);
   };
 
-  const handleEditOrder = (order) => {
-    setEditingOrder(order);
+  const handleEditCommandeClient = (commandeClient) => {
+    setEditingCommandeClient(commandeClient);
+    setSelectedClient(commandeClient.client);
+    setSelectedProduit(commandeClient.produit);
     form.setFieldsValue({
-      ...order,
-      orderDateTime: moment(order.orderDateTime),
-      deliveryDateTime: moment(order.deliveryDateTime),
+      ...commandeClient,
+      client: commandeClient.client.id,
+      produit: commandeClient.produit.id,
     });
     setIsModalVisible(true);
   };
 
-  const handleDeleteOrder = (orderId) => {
-    const newOrders = orders.filter(order => order.id !== orderId);
-    setOrders(newOrders);
-    message.success('Commande supprimée avec succès');
+  const handleDeleteCommandeClient = (commandeClientId) => {
+    const newCommandesClients = commandesClients.filter(c => c.id !== commandeClientId);
+    setCommandesClients(newCommandesClients);
+    message.success('Commande client supprimée avec succès');
   };
 
-  const handleSubmit = () => {
-    const values = form.getFieldsValue();
-    const totalPrice = values.price * values.quantity;
-    const newOrder = {
-      ...values,
-      totalPrice,
-      orderDateTime: values.orderDateTime.format('YYYY-MM-DD HH:mm:ss'),
-      deliveryDateTime: values.deliveryDateTime.format('YYYY-MM-DD HH:mm:ss'),
-    };
+  const handleSubmitCommandeClient = () => {
+    form.validateFields().then(values => {
+      const newCommandeClient = {
+        ...values,
+        client: selectedClient,
+        produit: selectedProduit,
+        dateLivraison: values.dateLivraison.format('YYYY-MM-DD'),
+      };
 
-    if (editingOrder) {
-      const newOrders = orders.map(order => 
-        order.id === editingOrder.id ? { ...order, ...newOrder } : order
-      );
-      setOrders(newOrders);
-      message.success('Commande mise à jour avec succès');
-    } else {
-      newOrder.id = orders.length + 1;
-      setOrders([...orders, newOrder]);
-      message.success('Commande ajoutée avec succès');
-    }
-    setIsModalVisible(false);
+      if (editingCommandeClient) {
+        const newCommandesClients = commandesClients.map(c =>
+          c.id === editingCommandeClient.id ? { ...c, ...newCommandeClient } : c
+        );
+        setCommandesClients(newCommandesClients);
+        message.success('Commande client mise à jour avec succès');
+      } else {
+        newCommandeClient.id = commandesClients.length + 1;
+        setCommandesClients([...commandesClients, newCommandeClient]);
+        message.success('Commande client ajoutée avec succès');
+      }
+      setIsModalVisible(false);
+    });
   };
-
-
 
   const columns = [
-    {
-      title: 'Nom du Client',
-      dataIndex: 'customerName',
-      key: 'customerName',
-    },
-    {
-      title: 'Nom du Produit',
-      dataIndex: 'productName',
-      key: 'productName',
-    },
-    {
-      title: 'Quantité',
-      dataIndex: 'quantity',
-      key: 'quantity',
-    },
-    {
-      title: 'Prix Unitaire',
-      dataIndex: 'price',
-      key: 'price',
-      render: (text) => `${text} FCFA`,
-    },
-    {
-      title: 'Prix Total',
-      dataIndex: 'totalPrice',
-      key: 'totalPrice',
-      render: (text) => `${text} FCFA`,
-    },
-    {
-      title: 'Statut',
-      dataIndex: 'status',
-      key: 'status',
-    },
-    {
-      title: 'Date et Heure de la Commande',
-      dataIndex: 'orderDateTime',
-      key: 'orderDateTime',
-      render: (text) => moment(text).format('YYYY-MM-DD HH:mm:ss'),
-    },
-    {
-      title: 'Date et Heure de la Livraison',
-      dataIndex: 'deliveryDateTime',
-      key: 'deliveryDateTime',
-      render: (text) => moment(text).format('YYYY-MM-DD HH:mm:ss'),
-    },
+    { title: 'Client', dataIndex: ['client', 'nom'], key: 'client' },
+    { title: 'Produit', dataIndex: ['produit', 'nom'], key: 'produit' },
+    { title: 'Quantité', dataIndex: 'quantite', key: 'quantite' },
+    { title: 'Date de Livraison', dataIndex: 'dateLivraison', key: 'dateLivraison' },
+    { title: 'Statut', dataIndex: 'statut', key: 'statut' },
     {
       title: 'Action',
       key: 'action',
       render: (text, record) => (
-        <span>
-          <Button type="link" onClick={() => handleEditOrder(record)}>Modifier</Button>
-          <Button type="link" onClick={() => handleDeleteOrder(record.id)}>Supprimer</Button>
-        </span>
+        <Space size="middle">
+          <Button icon={<EditOutlined />} onClick={() => handleEditCommandeClient(record)} />
+          <Button icon={<DeleteOutlined />} onClick={() => handleDeleteCommandeClient(record.id)} />
+        </Space>
       ),
     },
   ];
 
+  const handleSelectClient = (client) => {
+    setSelectedClient(client);
+    setIsClientsModalVisible(false);
+  };
+
+  const handleSelectProduit = (produit) => {
+    setSelectedProduit(produit);
+    setIsProduitsModalVisible(false);
+  };
+
   return (
     <div>
-      <Button type="primary" onClick={handleAddOrder} style={{ marginBottom: '16px' }}>Ajouter une commande</Button>
-
-      <Table 
-        dataSource={orders} 
-        columns={columns} 
-        rowKey="id" 
-        pagination={{ pageSize: 5 }}
-      />
+      <Button type="primary" icon={<PlusOutlined />} onClick={handleAddCommandeClient} style={{ marginBottom: '16px' }}>
+        Ajouter une Commande Client
+      </Button>
+      <Table columns={columns} dataSource={commandesClients} rowKey="id" />
 
       <Modal
-        title={editingOrder ? 'Modifier Commande' : 'Ajouter Commande'}
+        title={editingCommandeClient ? 'Modifier Commande Client' : 'Ajouter Commande Client'}
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
-        onOk={handleSubmit}
+        onOk={handleSubmitCommandeClient}
       >
         <Form form={form} layout="vertical">
-          <Form.Item name="customerName" label="Nom du Client" rules={[{ required: true, message: 'Veuillez entrer le nom du client' }]}>
-            <Input />
+          <Form.Item label="Client">
+            <Input value={selectedClient ? selectedClient.nom : ''} readOnly addonAfter={<Button onClick={() => setIsClientsModalVisible(true)}>Sélectionner</Button>} />
           </Form.Item>
-          <Form.Item name="productName" label="Nom du Produit" rules={[{ required: true, message: 'Veuillez entrer le nom du produit' }]}>
-            <Input />
+          <Form.Item label="Produit">
+            <Input value={selectedProduit ? selectedProduit.nom : ''} readOnly addonAfter={<Button onClick={() => setIsProduitsModalVisible(true)}>Sélectionner</Button>} />
           </Form.Item>
-          <Form.Item name="quantity" label="Quantité" rules={[{ required: true, message: 'Veuillez entrer la quantité' }]}>
+          <Form.Item name="quantite" label="Quantité" rules={[{ required: true, message: 'Veuillez entrer la quantité' }]}>
             <InputNumber min={1} style={{ width: '100%' }} />
           </Form.Item>
-          <Form.Item name="price" label="Prix Unitaire" rules={[{ required: true, message: 'Veuillez entrer le prix' }]}>
-            <InputNumber min={0} formatter={value => `${value} FCFA`} parser={value => value.replace(' FCFA', '')} style={{ width: '100%' }} />
+          <Form.Item name="dateLivraison" label="Date de Livraison" rules={[{ required: true, message: 'Veuillez entrer la date de livraison' }]}>
+            <DatePicker style={{ width: '100%' }} />
           </Form.Item>
-          <Form.Item name="status" label="Statut" rules={[{ required: true, message: 'Veuillez sélectionner le statut de la commande' }]}>
+          <Form.Item name="statut" label="Statut" rules={[{ required: true, message: 'Veuillez entrer le statut de la commande' }]}>
             <Select>
-              <Option value="en cours">En cours</Option>
-              <Option value="livré">Livré</Option>
-              <Option value="échoué">Échoué</Option>
+              <Select.Option value="En cours">En cours</Select.Option>
+              <Select.Option value="Livré">Livré</Select.Option>
+              <Select.Option value="Annulé">Annulé</Select.Option>
             </Select>
-          </Form.Item>
-          <Form.Item name="orderDateTime" label="Date et Heure de la Commande" rules={[{ required: true, message: 'Veuillez entrer la date et l\'heure de la commande' }]}>
-            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" style={{ width: '100%' }} />
-          </Form.Item>
-          <Form.Item name="deliveryDateTime" label="Date et Heure de la Livraison" rules={[{ required: true, message: 'Veuillez entrer la date et l\'heure de la livraison' }]}>
-            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" style={{ width: '100%' }} />
           </Form.Item>
         </Form>
       </Modal>
+
+      <ClientsModal visible={isClientsModalVisible} onCancel={() => setIsClientsModalVisible(false)} onSelect={handleSelectClient} />
+      <ProduitsModal visible={isProduitsModalVisible} onCancel={() => setIsProduitsModalVisible(false)} onSelect={handleSelectProduit} />
     </div>
   );
 };

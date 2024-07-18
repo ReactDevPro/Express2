@@ -20,7 +20,7 @@ import {Menu, Layout} from 'antd';
     let navigate = useNavigate();
     
     return (
-        <Sider collapsible>
+        <Sider collapsible >
                <img src ={type} alt='logo' width={200} height={64}/>
                <p style={{color: '#fff', textAlign: 'center', fontFamily: 'Franklin Gothic Medium, Arial Narrow, Arial, sans-serif'}}>Bienvenue chez </p>
                <p style={{color: 'orange', textAlign: 'center', fontFamily: 'Arial Narrow'}}>Express managment activity</p>
